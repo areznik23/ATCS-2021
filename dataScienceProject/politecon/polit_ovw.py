@@ -2,7 +2,7 @@
 # date: 6 December 2021
 # course: Advanced Topics Computer Science
 # instructor: Ms.Namasivayam
-# file: ./econ_ovw.py
+# file: ./polit_ovw.py
 # operation: make the economic dataset plots
 
 
