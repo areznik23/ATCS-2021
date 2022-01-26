@@ -30,7 +30,7 @@ Ex. "1-2-3-4-5-"
 def getPostorder(root):
     if not root:
         return ''
-    return getInorder(root.left) + getInorder(root.right) + str(root.val) + "-"
+    return getPostorder(root.left) + getPostorder(root.right) + str(root.val) + "-"
 
 
 ''' 
@@ -42,7 +42,7 @@ Ex. "1-2-3-4-5-"
 def getPreorder(root):
     if not root:
         return ''
-    return str(root.val) + "-" + getInorder(root.left) + getInorder(root.right)
+    return str(root.val) + "-" + getPreorder(root.left) + getPreorder(root.right)
 
 
 '''
