@@ -1,3 +1,12 @@
+# author: Alex Reznik
+# date: 6 December 2021
+# course: Advanced Topics Computer Science
+# instructor: Ms.Namasivayam
+# file: ./polit_ovw.py
+# operation: make the economic dataset plots
+
+
+# import packages
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
