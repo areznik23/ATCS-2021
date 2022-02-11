@@ -1,5 +1,4 @@
-import random
-
+from random import randint
 
 class TicTacToe:
     def __init__(self):
@@ -45,10 +44,23 @@ class TicTacToe:
         self.print_board()
         return
 
+    def take_random_turn(self, player):
+        rand_row = randint(0, 2)
+        rand_col = randint(0, 2)
+        while not self.is_valid_move(rand_row, rand_col):
+            rand_row = randint(0, 2)
+            rand_col = randint(0, 2)
+        self.place_player(player, rand_row, rand_col)
+        self.print_board()
+        return
+
     def take_turn(self, player):
         # TODO: Simply call the take_manual_turn function
         print(player + "'s Turn")
-        self.take_manual_turn(player)
+        if player == 'X':
+            self.take_manual_turn(player)
+        if player == 'O':
+            self.take_random_turn(player)
         return
 
     # have to write all of the check win functions
