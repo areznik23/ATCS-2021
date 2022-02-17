@@ -1,5 +1,10 @@
 from random import randint
 
+
+# narrow down the cylinder all the way
+# at a point as long as it is on a part of the cylinder that cancels
+# conceptualize the functions fully
+# take slow and understand each part of the problem
 class TicTacToe:
     def __init__(self):
         # TODO: Set up the board to be '-'
@@ -41,7 +46,6 @@ class TicTacToe:
             row = input('Enter a row: ')
             col = input('Enter a column: ')
         self.place_player(player, int(row), int(col))
-        self.print_board()
         return
 
     def take_random_turn(self, player):
@@ -54,13 +58,58 @@ class TicTacToe:
         self.print_board()
         return
 
+    def minimax(self, player):
+        opt_row = -1
+        opt_col = -1
+
+        if self.check_win('O'):
+            return 10, None, None
+        if self.check_tie():
+            return 0, None, None
+        if self.check_win('X'):
+            return -10, None, None
+
+        if player == 'O':
+            best = -10
+            for i in range(len(self.board)):
+                for j in range(len(self.board[i])):
+                    # self.place_player(player, i, j)
+                    if self.is_valid_move(i, j):
+                        self.place_player(player, i, j)
+                        score = self.minimax('X')[0]
+                        self.place_player('-', i, j)
+                        if best <= score:
+                            opt_row = i
+                            opt_col = j
+                            best = score
+            return (best, opt_row, opt_col)
+
+        if player == 'X':
+            worst = 10
+            for i in range(len(self.board)):
+                for j in range(len(self.board[i])):
+                    if self.is_valid_move(i, j):
+                        self.place_player(player, i, j)
+                        score = self.minimax('O')[0]
+                        self.place_player('-', i, j)
+                        if worst >= score:
+                            opt_row = i
+                            opt_col = j
+                            worst = score
+            return (worst, opt_row, opt_col)
+
+    def take_minimax_turn(self, player):
+        score, row, col = self.minimax(player)
+        self.place_player(player, row, col)
+
     def take_turn(self, player):
         # TODO: Simply call the take_manual_turn function
         print(player + "'s Turn")
         if player == 'X':
             self.take_manual_turn(player)
         if player == 'O':
-            self.take_random_turn(player)
+            self.take_minimax_turn(player)
+        self.print_board()
         return
 
     # have to write all of the check win functions
@@ -78,7 +127,8 @@ class TicTacToe:
 
     def check_diag_win(self, player):
         # TODO: Check diagonal win
-        diags = [[self.board[0][0], self.board[1][1], self.board[2][2]], [self.board[0][2], self.board[1][1], self.board[2][0]]]
+        diags = [[self.board[0][0], self.board[1][1], self.board[2][2]],
+                 [self.board[0][2], self.board[1][1], self.board[2][0]]]
         return [player, player, player] in diags
 
     def check_win(self, player):
@@ -112,6 +162,4 @@ class TicTacToe:
         if self.check_tie():
             print('Tie Game')
             return
-
         return
-
