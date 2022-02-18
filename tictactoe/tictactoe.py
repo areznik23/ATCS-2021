@@ -193,10 +193,7 @@ class TicTacToe:
 
         if self.check_win('X'):
             print('Player 1 (X) Wins!')
-            return
         if self.check_win('O'):
             print('Player 2 (O) Wins')
-            return
         if self.check_tie():
             print('Tie Game')
-            return
