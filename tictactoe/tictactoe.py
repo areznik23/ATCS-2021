@@ -150,7 +150,7 @@ class TicTacToe:
         if player == 'X':
             self.take_manual_turn(player)
         if player == 'O':
-            depth = 10
+            depth = 4
             self.take_minimax_turn(player, depth)
         self.print_board()
 
