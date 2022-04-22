@@ -98,9 +98,19 @@ class ImageCompressor:
         :param img: A 2D List of [R, G, B] values representing the image
         :return: A 2D List of [R, G, B] values representing the compressed image
         """
-        # TODO
+        img = self.convert_to_1D(img)
+        km = KMeans(n_clusters=10).fit(img)
+        centroids = km.cluster_centers_
+        labels = km.labels_
+        compressed = np.array([])
+        for label in labels:
+            compressed = np.append(compressed, centroids[label], axis=0)
+        compressed = self.convert_to_2D(compressed)
+        return compressed
 
 
 if __name__ == '__main__':
-    # TODO
-
+    imgcompressor = ImageCompressor()
+    img = imgcompressor.load_image('basils.jpeg')
+    img = imgcompressor.compress_image(img)
+    imgcompressor.save_image(img, 'basils_compressed.jpg')

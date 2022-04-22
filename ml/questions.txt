@@ -1,0 +1,104 @@
+Diamonds
+
+What ML model did you use and why?
+
+ I used logistic regression because I was predicting the cut of the diamond, which is a binary variable taking on one of two values: Fair (0) or Premium (1).
+
+What are you trying to predict? What columns did you use to make this prediction?
+
+I am trying to predict the cut of the diamond based on the carat, depth, and table of any given diamond.
+
+Did you use all of the columns in the dataset to create your model? Why or why not?
+
+Yes, I used all of the columns because I felt that they all provided valuable information to the prediction of the value of the diamond, which means they should be included.
+
+How confident are you in your model’s predictions?
+
+I feel strongly that my model's predictions are correct because it performed with near 96% accuracy on the test set. Furthermore, the dataset is large enough at over fifteen thousand diamonds to make relatively accurate predictions since the test set is over 3000 diamonds as well.
+
+Make a prediction with your model. List the variables/features you used and predictions
+you received.
+
+I used the variables carat = 0.5, depth = 60, table = 60 to predict the cut of the Diamond, which came out to be that it's likely a premium cut.
+
+Drinking
+
+What ML model did you use and why?
+
+I used linear regression because the variable I predicted was continuous (did have bounds between 0 - 1000)
+
+What are you trying to predict? What columns did you use to make this prediction?
+
+I am trying to predict the Cirrhosis Death Rate per thousands people that contracted the disease.
+
+Did you use all of the columns in the dataset to create your model? Why or why not?
+
+I used the urban population percentage, the wine consumption percentage, and the liquor consumption percentage to make the predictions. Wine and liquor consumption are definitely variables that are important to the topic, and urban population percentage	is less important.
+
+How confident are you in your model’s predictions?
+
+I feel strongly that my model's predictions are correct because it performed with near 96% accuracy on the test set. Furthermore, the dataset is large enough at over fifteen thousand diamonds to make relatively accurate predictions since the test set is over 3000 diamonds as well.
+
+Make a prediction with your model. List the variables/features you used and predictions
+you received.
+
+I used the variables carat = 0.5, depth = 60, table = 60 to predict the cut of the Diamond, which came out to be that it's likely a premium cut.
+
+
+
+Houses
+
+What ML model did you use and why?
+
+    I used linear regression because the output I'm predicting is a continuous value and thus linear regression is the most fitting model.
+
+What are you trying to predict? What columns did you use to make this prediction?
+
+    I am trying to predict the selling price of the houses using the columns bathrooms, lot_size_1000_sqft, living_space_1000_sqft, garages, bedrooms, agem, num_fire_places
+
+Did you use all of the columns in the dataset to create your model? Why or why not?
+
+    Yes I used all the columns in the dataset because I think all of the columns contribute to the price of a house.
+
+How confident are you in your model’s predictions?
+
+    I am very confident in my model's predictions because the R Squared value of 0.86, which means the model accounts for a significant percentage of the deviation is accounted for.
+
+Make a prediction with your model. List the variables/features you used and predictions you received.
+
+    The house price prediction from my model was 650204.71 given the futures Bathrooms: 3.0 Lot Size sqft:  8000.0 Living Space sqft: 3000.0 Garages:  2.0 Bedrooms: 4.0 Age:  20.0 Number of Fireplaces:  2.0.
+
+
+Homicides
+
+What ML model did you use?
+
+    I used linear regression to make the predictions for the model because I'm predicting the continuous values for the homicide rates in the city.
+
+What are you trying to predict? What columns did you use to make this prediction?
+
+    I am trying to predict the homicide rates given the Inhabitants, Percent_with_income_below_5000, and Percent_unemployed in the city.
+
+
+
+
+
+Employees
+
+
+Prediction line --- Age: 40.0 Distance from home:  50.0 Gender: 0.0 Job Involvement:  5.0 Monthly Income:  20000.0 Overtime:  0.0 Years at Company:  10.0 predict y val:  2.69 a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
