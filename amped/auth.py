@@ -24,7 +24,7 @@ def retrieve_acess_token():
         'client_secret': CLIENT_SECRET
     })
 
-    access_token = auth.json()['access_token']
+    return auth.json()['access_token']
 
 'stored value of access_token for export to other files'
-access_token = 'BQCuT5_FYdWbrMxIaTV7AIxZs4TWpZF4iSMrCLa9FwjksNISeFvdj2iRP8BK5tvhXMr4woRb0RebCRauOYI'
+access_token = retrieve_acess_token()
