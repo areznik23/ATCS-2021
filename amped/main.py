@@ -1,4 +1,6 @@
 import requests as req
+import numpy as np
+import pandas as pd
 import urllib
 
 # extract all the movie titles from the csv and then get the playlists with those titles in them
@@ -14,12 +16,28 @@ headers = {
 def get_request_function(title):
     return title.replace(' ', '+')
 
-for title in titles[:2]:
+playlist_ids = []
+filtered_titles = []
+for title in titles:
     title = get_request_function(title)
     r = req.get('https://api.spotify.com/v1/search?q='+title+'&type=playlist&limit=50', headers=headers)
-    id = r.json()['playlists']['items'][0]['id']
-    r = req.get('https://api.spotify.com/v1/playlists/' + id, headers=headers)
-    print(r.json())
+    try:
+        id = r.json()['playlists']['items'][0]['id']
+        playlist_ids.append(id)
+        print(title)
+        filtered_titles.append(title)
+    except:
+        continue
+
+
+# Reference Source for this task: https://cmdlinetips.com/2018/01/how-to-create-pandas-dataframe-from-multiple-lists/
+def output_data():
+    d = {'titles': filtered_titles, 'playlist_id': playlist_ids}
+    df = pd.DataFrame(d)
+    print(df)
+    df.to_csv('data.csv', index=False)
+
+output_data()
 
 # r = req.get('https://api.spotify.com/v1/search?q=Original+Motion+Picture+Soundtrack&type=playlist&limit=50', headers=headers)
 # r = r.json()
