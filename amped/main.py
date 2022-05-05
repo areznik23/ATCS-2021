@@ -16,28 +16,38 @@ headers = {
 def get_request_function(title):
     return title.replace(' ', '+')
 
-playlist_ids = []
-filtered_titles = []
-for title in titles:
-    title = get_request_function(title)
-    r = req.get('https://api.spotify.com/v1/search?q='+title+'&type=playlist&limit=50', headers=headers)
-    try:
-        id = r.json()['playlists']['items'][0]['id']
-        playlist_ids.append(id)
-        print(title)
-        filtered_titles.append(title)
-    except:
-        continue
+def get_playlist_id():
+    playlist_ids = []
+    filtered_titles = []
+    for title in titles:
+        title = get_request_function(title)
+        r = req.get('https://api.spotify.com/v1/search?q='+title+'&type=playlist&limit=50', headers=headers)
+        try:
+            id = r.json()['playlists']['items'][0]['id']
+            playlist_ids.append(id)
+            print(title)
+            filtered_titles.append(title)
+        except:
+            continue
 
 
-# Reference Source for this task: https://cmdlinetips.com/2018/01/how-to-create-pandas-dataframe-from-multiple-lists/
-def output_data():
-    d = {'titles': filtered_titles, 'playlist_id': playlist_ids}
-    df = pd.DataFrame(d)
-    print(df)
-    df.to_csv('data.csv', index=False)
+    # Reference Source for this task: https://cmdlinetips.com/2018/01/how-to-create-pandas-dataframe-from-multiple-lists/
+    def output_data():
+        d = {'titles': filtered_titles, 'playlist_id': playlist_ids}
+        df = pd.DataFrame(d)
+        print(df)
+        df.to_csv('data.csv', index=False)
 
-output_data()
+data = pd.read_csv('data.csv')
+def get_song_ids():
+    for playlist in data['playlist_id'][:5]:
+        r = req.get('https://api.spotify.com/v1/playlists/' + playlist, headers=headers)
+        r = r.json()
+        for track in r['tracks']['items']:
+            id = track['track']['name']
+
+get_song_ids()
+
 
 # r = req.get('https://api.spotify.com/v1/search?q=Original+Motion+Picture+Soundtrack&type=playlist&limit=50', headers=headers)
 # r = r.json()
@@ -51,3 +61,4 @@ output_data()
 # print(r)
 # for playlist in r:
 #     print(playlist['name'])
+
