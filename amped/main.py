@@ -39,12 +39,43 @@ def get_playlist_id():
         df.to_csv('data.csv', index=False)
 
 data = pd.read_csv('data.csv')
+entries = []
+from Movie import Movie
+from Track import Track
+# key features to analyze over
+# have to get the median audio features for each of the movies
+# upload all of this data into a json file that will then be used to build the model
+# development of the model and then interface with users
 def get_song_ids():
-    for playlist in data['playlist_id'][:5]:
+    i = 0
+    titles = list(data['titles'])
+    for playlist in data['playlist_id'][:1]:
         r = req.get('https://api.spotify.com/v1/playlists/' + playlist, headers=headers)
         r = r.json()
+        mov = Movie(titles[i], playlist)
         for track in r['tracks']['items']:
-            id = track['track']['name']
+            id = track['track']['id']
+            r = req.get('https://api.spotify.com/v1/audio-features/' + id, headers=headers)
+            r = r.json()
+            track = Track(
+                id,
+                r['danceability'],
+                r['energy'],
+                r['key'],
+                r['loudness'],
+                r['mode'],
+                r['speechiness'],
+                r['acousticness'],
+                r['instrumentalness'],
+                r['liveness'],
+                r['valence'],
+                r['tempo']
+            )
+            mov.add_track(track)
+        output = mov.format()
+        print(output)
+        i += 1
+
 
 get_song_ids()
 
