@@ -46,36 +46,50 @@ from Track import Track
 # have to get the median audio features for each of the movies
 # upload all of this data into a json file that will then be used to build the model
 # development of the model and then interface with users
+# method for the number of k means clusters: https://blog.cambridgespark.com/how-to-determine-the-optimal-number-of-clusters-for-k-means-clustering-14f27070048f
+
+from pandas import json_normalize
+
 def get_song_ids():
-    i = 0
+    i = 170
     titles = list(data['titles'])
-    for playlist in data['playlist_id'][:1]:
+    movies = []
+    for playlist in data['playlist_id']:
         r = req.get('https://api.spotify.com/v1/playlists/' + playlist, headers=headers)
         r = r.json()
         mov = Movie(titles[i], playlist)
-        for track in r['tracks']['items']:
-            id = track['track']['id']
-            r = req.get('https://api.spotify.com/v1/audio-features/' + id, headers=headers)
-            r = r.json()
-            track = Track(
-                id,
-                r['danceability'],
-                r['energy'],
-                r['key'],
-                r['loudness'],
-                r['mode'],
-                r['speechiness'],
-                r['acousticness'],
-                r['instrumentalness'],
-                r['liveness'],
-                r['valence'],
-                r['tempo']
-            )
-            mov.add_track(track)
-        output = mov.format()
-        print(output)
+        try:
+            for track in r['tracks']['items'][170:]:
+                    id = track['track']['id']
+                    r = req.get('https://api.spotify.com/v1/audio-features/' + id, headers=headers)
+                    r = r.json()
+                    track = Track(
+                        id,
+                        r['danceability'],
+                        r['energy'],
+                        r['key'],
+                        r['loudness'],
+                        r['mode'],
+                        r['speechiness'],
+                        r['acousticness'],
+                        r['instrumentalness'],
+                        r['liveness'],
+                        r['valence'],
+                        r['tempo']
+                    )
+                    mov.add_track(track)
+        except TypeError or KeyError:
+            continue
+        mov.set_median_audio_features()
+        movies.append(mov.format())
+        print(mov.format())
         i += 1
+    # reference source for this step: https://sparkbyexamples.com/pandas/pandas-convert-json-to-dataframe/
+    df = json_normalize(movies)
+    output_dataframe(df)
 
+def output_dataframe(df):
+    df.to_csv('movie_audio.csv', index=False)
 
 get_song_ids()
 
