@@ -5,8 +5,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import pickle
 
+# Turns the array of json formatted movies into a dataframe
+# Resource: https://stackoverflow.com/questions/21104592/json-to-pandas-dataframe
 movies = json_normalize(movies)
 
+# Scales the data for more acurate results in the model
 def scale_data():
     x = movies[[
         'audio_features.danceability',
@@ -27,6 +30,7 @@ def scale_data():
     return x
 
 # Resource: referenced our work in kmeans_clustering.py for class
+# Used the elbow method to determine the ideal number of clusters
 # optimal k value = 8
 def get_optimal_k():
     inertias = []
@@ -44,6 +48,7 @@ def save_model(model):
     pickle.dump(model, open('final_model.sav', 'wb'))
 
 # best value => k = 8
+# generates the model with 8 clusters for the movie data
 def main():
     k = 8
     x = scale_data()
