@@ -1,3 +1,10 @@
+"""
+Amped Music/Movie Project
+
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
 import requests as req
 from auth import access_token
 from Track import Track

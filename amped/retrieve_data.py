@@ -1,3 +1,11 @@
+"""
+Amped Music/Movie Project
+
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
+
 import pandas as pd
 
 # file for organizational purposes, export of the titles for the movies

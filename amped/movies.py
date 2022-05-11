@@ -1,3 +1,10 @@
+"""
+Amped Music/Movie Project
+
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
 # database of the pool of movies from which the program can make recommendations
 # used for export to other files
 movies = [

@@ -1,3 +1,11 @@
+"""
+Amped Music/Movie Project
+
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
+
 from movies import movies
 from pandas import json_normalize
 import matplotlib.pyplot as plt

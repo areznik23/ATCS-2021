@@ -1,5 +1,11 @@
-# Track object for operations with a single song
+"""
+Amped Music/Movie Project
 
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
+# Track object for operations with a single song
 class Track:
 
     def __init__(self, id, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo):

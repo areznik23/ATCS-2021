@@ -1,3 +1,10 @@
+"""
+Amped Music/Movie Project
+
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
 '''
     Initial Project Pseudocode
 

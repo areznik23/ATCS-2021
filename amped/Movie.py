@@ -1,3 +1,11 @@
+"""
+Amped Music/Movie Project
+
+@author: Alex Reznik
+@version: 10 May 2022
+"""
+
+
 import statistics as stat
 
 # Movie object, but used as a playlist object as well essentially
