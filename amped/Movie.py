@@ -1,5 +1,6 @@
 import statistics as stat
 
+# Movie object, but used as a playlist object as well essentially
 class Movie:
     def __init__(self, title, id):
         self.title = title.replace('+', ' ')
@@ -18,10 +19,12 @@ class Movie:
         self.valence = []
         self.tempo = []
 
+    # enables outside files to add a track to the given playlist
     def add_track(self, track):
         self.tracks.append(track)
         self.formatted_tracks.append(track.format())
 
+    # List of each audio feature for every track in the playlist
     def aggregate_audio_features(self):
         for track in self.tracks:
             self.danceability.append(track.danceability)
@@ -51,9 +54,11 @@ class Movie:
         self.valence = self.get_median(self.valence)
         self.tempo = self.get_median(self.tempo)
 
+    # obtains the median value and rounds it off
     def get_median(self, l):
         return round(stat.median(l), 4)
 
+    # JSON Style formatting
     def format(self):
         return {'title': self.title, 'audio_features': {
                 'danceability': self.danceability,
@@ -69,6 +74,7 @@ class Movie:
                 'tempo': self.tempo
             }}
 
+    # Formatting to match that of the track file
     def model_format(self):
         return {'title': self.title, 'audio_features': {
             'audio_features.danceability': self.danceability,

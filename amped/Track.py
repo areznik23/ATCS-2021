@@ -1,3 +1,5 @@
+# Track object for operations with a single song
+
 class Track:
 
     def __init__(self, id, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo):
@@ -14,6 +16,7 @@ class Track:
         self.valence = valence
         self.tempo = tempo
 
+    # Format method to align with the amped.py file standards for operation
     def format(self):
         return {
             'track_id': self.id,

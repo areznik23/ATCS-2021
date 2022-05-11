@@ -1,3 +1,5 @@
+# database of the pool of movies from which the program can make recommendations
+# used for export to other files
 movies = [
 {'title': 'The Shawshank Redemption', 'audio_features': {'danceability': 0.168, 'energy': 0.0703, 'key': 6.0, 'loudness': -24.3275, 'mode': 1.0, 'speechiness': 0.0399, 'acousticness': 0.9255, 'instrumentalness': 0.9055, 'liveness': 0.1035, 'valence': 0.0397, 'tempo': 90.9875}},
 {'title': 'The Godfather', 'audio_features': {'danceability': 0.235, 'energy': 0.2195, 'key': 5.0, 'loudness': -14.208, 'mode': 0.0, 'speechiness': 0.0374, 'acousticness': 0.917, 'instrumentalness': 0.8045, 'liveness': 0.1075, 'valence': 0.115, 'tempo': 105.3765}},
