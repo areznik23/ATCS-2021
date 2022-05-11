@@ -1,4 +1,6 @@
 '''
+    Initial Project Pseudocode
+
     Get list of the top 10,000 or so movies
     Movie Lens Database to retrieve the information
     Write a CSV file of all of those movies
@@ -8,15 +10,16 @@
     Get the features for each songs and write to the CSV file
 '''
 
-'Reference Source: https://stmorse.github.io/journal/spotify-api.html'
+# Resource: https://developer.spotify.com/documentation/web-api/reference/#/
+# Resource: https://stmorse.github.io/journal/spotify-api.html
 
 import requests as req
 
-'Authentication Keys'
+# Authentication Keys for the program
 CLIENT_ID = '93edc838830a416b9c5fefb30a1d2eb1'
 CLIENT_SECRET = '37bf5193927d41508307fe4e9b21b107'
 
-'Function to receive access token'
+# Retrieves the access token from the spotify API
 def retrieve_acess_token():
     auth = req.post('https://accounts.spotify.com/api/token', {
         'grant_type': 'client_credentials',
@@ -26,5 +29,6 @@ def retrieve_acess_token():
 
     return auth.json()['access_token']
 
-'stored value of access_token for export to other files'
+# Stored value of access_token for export to other files
 access_token = retrieve_acess_token()
+
