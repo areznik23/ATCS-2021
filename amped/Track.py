@@ -18,16 +18,16 @@ class Track:
         return {
             'track_id': self.id,
             'audio_features': {
-                'danceability': self.danceability,
-                'energy': self.energy,
-                'key': self.key,
-                'loudness': self.loudness,
-                'mode': self.mode,
-                'speechiness': self.speechiness,
-                'acousticness': self.acousticness,
-                'instrumentalness': self.instrumentalness,
-                'liveness': self.liveness,
-                'valence': self.valence,
-                'tempo': self.tempo
+                'audio_features.danceability': self.danceability,
+                'audio_features.energy': self.energy,
+                'audio_features.key': self.key,
+                'audio_features.loudness': self.loudness,
+                'audio_features.mode': self.mode,
+                'audio_features.speechiness': self.speechiness,
+                'audio_features.acousticness': self.acousticness,
+                'audio_features.instrumentalness': self.instrumentalness,
+                'audio_features.liveness': self.liveness,
+                'audio_features.valence': self.valence,
+                'audio_features.tempo': self.tempo
             }
         }
