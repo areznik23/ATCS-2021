@@ -1,6 +1,7 @@
 import requests as req
 from auth import access_token
 from Track import Track
+from Movie import Movie
 import pandas as pd
 from pandas import json_normalize
 import pickle
@@ -15,7 +16,15 @@ headers = {
 }
 
 def get_user_input():
+    pref = input("Would you like to enter a song(0) or a playlist(1)? ")
+    return pref
+
+def get_track_title_input():
     title = input("Please enter a song title: ")
+    return title.replace(' ', '+')
+
+def get_playlist_title_input():
+    title = input("Please enter a playlist title: ")
     return title.replace(' ', '+')
 
 def get_track_data(title):
@@ -23,6 +32,23 @@ def get_track_data(title):
     song_id = r.json()['tracks']['items'][0]['id']
     r = req.get('https://api.spotify.com/v1/audio-features/' + song_id, headers=headers)
     return song_id, r.json()
+
+def get_playlist_data(title):
+    r = req.get('https://api.spotify.com/v1/search?q=' + title + '&type=playlist&limit=1', headers=headers)
+    playlist_id = r.json()['playlists']['items'][0]['id']
+    r = req.get('https://api.spotify.com/v1/playlists/' + playlist_id, headers=headers)
+    r = r.json()
+    # treat the playlist as though it is a movie, create a movie object for the playlist
+    mov = Movie('New', playlist_id)
+    for track in r['tracks']['items']:
+        song_id = track['track']['id']
+        r = req.get('https://api.spotify.com/v1/audio-features/' + song_id, headers=headers)
+        r = r.json()
+        track = create_track(song_id, r)
+        mov.add_track(track)
+    mov.set_median_audio_features()
+    result = mov.model_format()
+    return playlist_id, result
 
 def create_track(song_id, r):
     return Track(
@@ -41,9 +67,9 @@ def create_track(song_id, r):
     )
 
 
-def set_data(track, title):
+def set_data(result, title):
     # Resource: https://stackoverflow.com/questions/21104592/json-to-pandas-dataframe
-    data = json_normalize(track.format()['audio_features'])
+    data = json_normalize(result['audio_features'])
     data.insert(0, "title", title, False)
     # Resource: https://pandas.pydata.org/docs/user_guide/merging.html
     frames = [movies, data]
@@ -88,17 +114,25 @@ def get_recommendations(labels, pred):
 
 def output_recommendations(recs):
     print("\nYour Movie Recommendations\n")
-    i = 0
+    i = 1
     for movie in recs:
         print(i, "-", movie)
         i += 1
     print()
 
 def main():
-    title = get_user_input()
-    song_id, r = get_track_data(title)
-    track = create_track(song_id, r)
-    data = set_data(track, title)
+    pref = get_user_input()
+    r = {}
+    title = ''
+    if pref == '0':
+        title = get_track_title_input()
+        song_id, r = get_track_data(title)
+        track = create_track(song_id, r)
+        r = track.format()
+    if pref == '1':
+        title = get_playlist_title_input()
+        playlist_id, r = get_playlist_data(title)
+    data = set_data(r, title)
     data = scale_data(data)
     pred, centroids, labels = prediction(data)
     recs = get_recommendations(labels, pred)

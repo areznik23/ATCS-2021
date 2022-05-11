@@ -68,3 +68,18 @@ class Movie:
                 'valence': self.valence,
                 'tempo': self.tempo
             }}
+
+    def model_format(self):
+        return {'title': self.title, 'audio_features': {
+            'audio_features.danceability': self.danceability,
+            'audio_features.energy': self.energy,
+            'audio_features.key': self.key,
+            'audio_features.loudness': self.loudness,
+            'audio_features.mode': self.mode,
+            'audio_features.speechiness': self.speechiness,
+            'audio_features.acousticness': self.acousticness,
+            'audio_features.instrumentalness': self.instrumentalness,
+            'audio_features.liveness': self.liveness,
+            'audio_features.valence': self.valence,
+            'audio_features.tempo': self.tempo
+        }}
