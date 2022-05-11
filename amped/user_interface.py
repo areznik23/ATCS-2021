@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
 #
-# model = pickle.load(open('final_model.sav', 'rb'))
+model = pickle.load(open('final_model.sav', 'rb'))
 movies = json_normalize(movies)
 
 headers = {
@@ -58,16 +58,19 @@ data = data[[
 scaler = StandardScaler().fit(data)
 data = scaler.transform(data)
 
+data = [data[len(data) - 1]]
+print(data)
+
 k = 8
 
-model = KMeans(n_clusters=k).fit(data)
+# model = KMeans(n_clusters=k).fit(data)
 centroids = model.cluster_centers_
 labels = model.labels_
 
-pred = labels[len(labels) - 1]
+pred = model.predict(data)
 index = 0
 recs = []
-for label in labels[:len(labels) - 1]:
+for label in labels[:len(labels)]:
     if pred == label:
         print(movies.loc[[index], 'title'])
     index += 1
