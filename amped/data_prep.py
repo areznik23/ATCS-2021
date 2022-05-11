@@ -63,7 +63,7 @@ entries = []
 # index = 170 because was trying to get the movies after encountering errors and slow running
 # intended to retrieve the songs for each playlist for each movie
 def get_song_ids():
-    i = 170
+    i = 0
     titles = list(data['titles'])
     movies = []
     for playlist in data['playlist_id']:
@@ -71,7 +71,7 @@ def get_song_ids():
         r = r.json()
         mov = Movie(titles[i], playlist)
         try:
-            for track in r['tracks']['items'][170:]:
+            for track in r['tracks']['items']:
                     id = track['track']['id']
                     r = req.get('https://api.spotify.com/v1/audio-features/' + id, headers=headers)
                     r = r.json()
