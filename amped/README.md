@@ -9,6 +9,7 @@ Functionality: Download directory and run the amped.py file
 Directory
 <li>amped.py: main operational file</li>
 <li>final_mode.sav: the saved Kmeans model for predictions</li>
+<li>model.py: generating the Kmeans ML model</li>
 <li>movies.py: database of movies the model is based on - recommendation pool</li>
 <li>Movie.py: the Movie object</li>
 <li>Track.py: the Track object</li>
